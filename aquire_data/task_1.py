@@ -2,10 +2,11 @@ import pandas as pd
 from mysql.connector import Error
 from dateutil import parser
 
-from appplication_context import cursor, conn
+from appplication_context import conn
 securities_available_for_equity_segment = pd.read_csv('https://archives.nseindia.com/content/equities/EQUITY_L.csv')
 
 try:
+    cursor = conn.cursor()
     cursor.execute("CREATE DATABASE IF NOT EXISTS nse_stock_data")
     if conn.is_connected():
         cursor = conn.cursor()

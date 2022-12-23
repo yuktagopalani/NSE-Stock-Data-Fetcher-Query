@@ -14,7 +14,7 @@ print("Database is created")
 try:
     if conn.is_connected():
         cursor = conn.cursor()
-        cursor.execute("select database();")
+        cursor.execute("use nse_stock_data;")
         record = cursor.fetchone()
         cursor.execute('DROP TABLE IF EXISTS latest_bhavcopy;')
         cursor.execute("CREATE TABLE latest_bhavcopy(symbol varchar(255), series varchar(20), "

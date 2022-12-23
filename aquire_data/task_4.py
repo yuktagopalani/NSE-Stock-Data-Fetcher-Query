@@ -7,6 +7,7 @@ import os
 import pandas as pd
 import glob
 import shutil
+from utils.insert_data_to_db import insert_data_to_db
 
 current_date = date.today()
 days_before = (date.today() - timedelta(days=30))
@@ -31,9 +32,6 @@ for x in range(30):
         nseMonth) + "/cm" + fileName + "bhav.csv.zip"
 
     fileURL = urlparse(URLString).geturl()
-    print("URL Type : ", type(fileURL))
-
-    print("URL To be downloaded : " + fileURL)
 
     ZIPFileDir = "NSEZipFiles"
     Path(ZIPFileDir).mkdir(parents=True, exist_ok=True)
@@ -67,6 +65,13 @@ for eachFile in allCSVFiles:
     sortedFrame = frame.sort_values(["SYMBOL", "TIMESTAMP"])
     sortedFrame.to_csv("stock_data_30_days.csv", index=None)
 
+stock_data_30_days = pd.read_csv('stock_data_30_days.csv')
 shutil.rmtree("NSECSVFiles")
 shutil.rmtree("NSEZipFiles")
+dates = insert_data_to_db(stock_data_30_days)
+
+# Inserting stock_data_30_days.csv into database
+
+
+
 

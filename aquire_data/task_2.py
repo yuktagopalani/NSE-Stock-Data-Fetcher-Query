@@ -17,6 +17,7 @@ except Error as e:
 
 try:
     conn = c.connect(host='localhost', database='nse_stock_data', user='root', password='123456')
+    print(type(conn))
 
     if conn.is_connected():
         cursor = conn.cursor()

@@ -1,13 +1,14 @@
 import mysql.connector as c
 from mysql.connector import Error
 from dateutil import parser
+from decouple import config
 
 
 def insert_data_to_db(data):
     dates = []
     try:
         conn = c.connect(host='localhost', user='root',
-                            password='123456')#give ur username, password
+                            password=config('mysql_pass'))#give ur username, password
         if conn.is_connected():
             cursor = conn.cursor()
             cursor.execute("CREATE DATABASE IF NOT EXISTS nse_stock_data")
@@ -27,7 +28,6 @@ def insert_data_to_db(data):
                            "high float(15), low float(15), close float(15), last float(15), tottrdqty int, "
                            "timestamp date);")
 
-
             for i, row in data.iterrows():
                 sql = "INSERT INTO nse_stock_data.stock_data_30_days VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s);"
                 date = parser.parse(str(row[8]))
@@ -41,7 +41,6 @@ def insert_data_to_db(data):
             print('data inserted successfully ')
 
             dates = list(set(dates))
-
 
     except Error as e:
         print(e)

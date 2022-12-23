@@ -1,16 +1,13 @@
-import pandas as pd
 from mysql.connector import Error
 from dateutil import parser
 from aquire_data.task_1 import securities_available_for_equity_segment
 from aquire_data.task_2 import latest_bhavcopy
 from appplication_context import cursor, conn
 
-
 try:
     cursor.execute("CREATE DATABASE IF NOT EXISTS nse_stock_data")
     if conn.is_connected():
-        cursor = conn.cursor()
-        cursor.execute("select database();")
+        cursor.execute("use nse_stock_data;")
         record = cursor.fetchone()
         cursor.execute('DROP TABLE IF EXISTS equity_segment;')
         cursor.execute("CREATE TABLE equity_segment(symbol varchar(255), company_name varchar(255), series varchar("

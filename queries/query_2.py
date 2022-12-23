@@ -1,9 +1,8 @@
-import mysql.connector as c
 from mysql.connector import Error
 from aquire_data.task_4 import dates
 from dateutil import parser
 from utils.convert_table_to_csv import export
-from appplication_context import cursor, conn
+from appplication_context import conn
 
 try:
     if conn.is_connected():
@@ -13,11 +12,10 @@ try:
         flag=0
         for date in dates:
             dt = str(parser.parse(str(date)))
-            print(dt)
             query = "CREATE TABLE query2_output_" + dt[:4] + dt[5:7] + dt[8:10] + " AS SELECT * from stock_data_30_days where timestamp=\"" + dt[:10] + "\" ORDER BY ((close - open)/open) DESC LIMIT 25;"
-            print(query)
+
             table_name = "query2_output_" + dt[:4] + dt[5:7] + dt[8:10]
-            print(table_name)
+
             cursor.execute("DROP TABLE IF EXISTS " + table_name + ";")
             cursor.execute(query)
             if flag == 0:

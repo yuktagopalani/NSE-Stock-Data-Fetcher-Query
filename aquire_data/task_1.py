@@ -1,16 +1,19 @@
 import pandas as pd
 from mysql.connector import Error
 from dateutil import parser
+from appplication_context import conn, cursor
+from utils.convert_table_to_csv import export
 
-from appplication_context import conn
 securities_available_for_equity_segment = pd.read_csv('https://archives.nseindia.com/content/equities/EQUITY_L.csv')
 
+
+# Inserting csv data to database
+
 try:
-    cursor = conn.cursor()
-    cursor.execute("CREATE DATABASE IF NOT EXISTS nse_stock_data")
+    cursor.execute("CREATE DATABASE IF NOT EXISTS nse_stock_data;")
     if conn.is_connected():
         cursor = conn.cursor()
-        cursor.execute("select database();")
+        cursor.execute("use nse_stock_data;")
         record = cursor.fetchone()
         cursor.execute('DROP TABLE IF EXISTS equity_segment;')
         cursor.execute("CREATE TABLE equity_segment(symbol varchar(255), company_name varchar(255), series varchar("
@@ -26,7 +29,7 @@ try:
             conn.commit()
 
     cursor = conn.cursor()
-
+    export('equity_segment')
 
 except Error as e:
     print("Error while connecting to MySQL", e)

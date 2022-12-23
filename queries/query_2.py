@@ -12,7 +12,7 @@ try:
         for date in dates:
             dt = str(parser.parse(str(date)))
             print(dt[:10])
-            query = f"SELECT * from stock_data_30_days where timestamp="+ dt[:10] + " ORDER BY ((close - open)/open) DESC LIMIT 25;"
+            query = f"SELECT * from stock_data_30_days where timestamp=\"" + dt[:10] + "\" ORDER BY ((close - open)/open) DESC LIMIT 25;"
             if flag == 0:
                 cursor.execute("CREATE TABLE query2_output AS " + query)
                 flag = 1

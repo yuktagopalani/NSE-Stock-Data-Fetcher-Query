@@ -1,9 +1,8 @@
 import mysql.connector as c
 from mysql.connector import Error
 from utils.convert_table_to_csv import export
+from appplication_context import cursor, conn
 try:
-    conn = c.connect(host='localhost', user='root',
-                     password='123456')  # give ur username, password
     if conn.is_connected():
         cursor = conn.cursor()
         cursor.execute("USE nse_stock_data;")

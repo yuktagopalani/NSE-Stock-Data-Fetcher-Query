@@ -1,24 +1,17 @@
 import pandas as pd
 from dateutil import parser
-import mysql.connector as c
+
 from mysql.connector import Error
 
+from appplication_context import cursor, conn
 latest_bhavcopy = pd.read_csv('https://archives.nseindia.com/products/content/sec_bhavdata_full_22122022.csv')
 
-try:
-    conn = c.connect(host='localhost', user='root',
-                     password='123456')  # give ur username, password
-    if conn.is_connected():
-        cursor = conn.cursor()
-        cursor.execute("CREATE DATABASE IF NOT EXISTS nse_stock_data")
-        print("Database is created")
-except Error as e:
-    print("Error while connecting to MySQL", e)
+
+cursor.execute("CREATE DATABASE IF NOT EXISTS nse_stock_data")
+print("Database is created")
+
 
 try:
-    conn = c.connect(host='localhost', database='nse_stock_data', user='root', password='123456')
-    print(type(conn))
-
     if conn.is_connected():
         cursor = conn.cursor()
         cursor.execute("select database();")

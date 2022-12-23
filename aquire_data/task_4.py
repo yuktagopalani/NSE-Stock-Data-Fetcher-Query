@@ -70,7 +70,7 @@ shutil.rmtree("NSECSVFiles")
 shutil.rmtree("NSEZipFiles")
 dates = insert_data_to_db(stock_data_30_days)
 
-# Inserting stock_data_30_days.csv into database
+
 
 
 

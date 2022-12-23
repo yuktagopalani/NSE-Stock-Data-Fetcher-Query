@@ -2,10 +2,8 @@ import mysql.connector as c
 from mysql.connector import Error
 from aquire_data.task_4 import dates
 from dateutil import parser
-
+from appplication_context import cursor, conn
 try:
-    conn = c.connect(host='localhost', user='root',
-                     password='123456')  # give ur username, password
     if conn.is_connected():
         cursor = conn.cursor()
         cursor.execute("USE nse_stock_data;")

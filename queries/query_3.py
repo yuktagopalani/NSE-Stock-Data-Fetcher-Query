@@ -18,7 +18,11 @@ try:
         cursor.execute("CREATE TABLE q3_tmp AS SELECT * FROM q3_open NATURAL JOIN q3_close;")
         cursor.execute("DROP TABLE IF EXISTS q3_open;")
         cursor.execute("DROP TABLE IF EXISTS q3_close;")
-        cursor.execute("CREATE TABLE query3_output AS SELECT * FROM q3_tmp ORDER BY ((close - open)/open) LIMIT 25;")
+        cursor.execute("DROP TABLE IF EXISTS query3_output;")
+        # cursor.execute("CREATE TABLE query3_output AS SELECT * FROM q3_tmp ORDER BY ((close - open)/open) desc LIMIT 25);")
+        # cursor.execute("CREATE TABLE query3_output AS SELECT es.symbol,es.company_name, tmp.open, tmp.close FROM q3_tmp tmp, equity_segment es ORDER BY ((tmp.close - tmp.open)/tmp.open) desc LIMIT 25;")
+        cursor.execute("CREATE TABLE query3_output AS SELECT * FROM q3_tmp ORDER BY ((close - open)/open) DESC LIMIT 25;")
+
         cursor.execute("DROP TABLE IF EXISTS q3_tmp;")
         export('query3_output')
 

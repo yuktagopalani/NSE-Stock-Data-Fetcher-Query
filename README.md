@@ -4,4 +4,6 @@ Output for Query 1: https://github.com/yuktagopalani/NSE-Stock-Data-Fetcher-Quer
 
 Output for Query 2: https://github.com/yuktagopalani/NSE-Stock-Data-Fetcher-Query/blob/main/queries/query2_output.csv
 
+Output for Query 3: https://github.com/yuktagopalani/NSE-Stock-Data-Fetcher-Query/blob/main/queries/query3_output.csv
+
 

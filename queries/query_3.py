@@ -16,7 +16,7 @@ try:
         cursor.execute("DROP TABLE IF EXISTS q3_open;")
         cursor.execute("DROP TABLE IF EXISTS q3_close;")
         cursor.execute("DROP TABLE IF EXISTS query3_output;")
-        cursor.execute("CREATE TABLE query3_output AS SELECT * FROM q3_tmp ORDER BY ((close - open)/open) DESC LIMIT 25;")
+        cursor.execute("CREATE TABLE query3_output AS SELECT *,((close - open)/open) as gain  FROM q3_tmp ORDER BY gain DESC LIMIT 25;")
         cursor.execute("DROP TABLE IF EXISTS q3_tmp;")
         export('query3_output')
 

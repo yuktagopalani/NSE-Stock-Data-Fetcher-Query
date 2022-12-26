@@ -12,7 +12,7 @@ try:
         flag=0
         for date in dates:
             dt = str(parser.parse(str(date)))
-            query = "CREATE TABLE query2_output_" + dt[:4] + dt[5:7] + dt[8:10] + " AS SELECT * from stock_data_30_days where timestamp=\"" + dt[:10] + "\" ORDER BY ((close - open)/open) DESC LIMIT 25;"
+            query = "CREATE TABLE query2_output_" + dt[:4] + dt[5:7] + dt[8:10] + " AS SELECT *, ((close - open)/open) as gain from stock_data_30_days where timestamp=\"" + dt[:10] + "\" ORDER BY gain DESC LIMIT 25;"
 
             table_name = "query2_output_" + dt[:4] + dt[5:7] + dt[8:10]
 

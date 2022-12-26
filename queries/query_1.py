@@ -5,7 +5,8 @@ from appplication_context import cursor, conn
 try:
     if conn.is_connected():
         cursor.execute("USE nse_stock_data;")
-        query = "SELECT * from latest_bhavcopy ORDER BY ((close_price - open_price)/open_price) DESC LIMIT 25;"
+        cursor.execute("DROP TABLE IF EXISTS query1_output;")
+        query = "SELECT *,((close_price - open_price)/open_price) as gain from latest_bhavcopy ORDER BY gain DESC LIMIT 25;"
         cursor.execute("CREATE TABLE query1_output AS " + query)
 
     export('query1_output')
